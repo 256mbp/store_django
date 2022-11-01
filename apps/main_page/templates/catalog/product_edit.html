@@ -1,0 +1,17 @@
+{% extends 'catalog/catalog.html' %}
+
+{% block content %}
+    <h2>Продукт:</h2>
+    <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+<!--        {{ form.as_p }}-->
+        Тип: {{ form.type }}
+        Название: {{ form.name }}
+        Количество: {{ form.amount }}
+        Цена: {{ form.price }}
+        Характеристики: {{ form.characteristic }}
+        Описание: {{ form.description }}
+        Картинка: {{ form.picture }}
+
+        <button type="submit" class="save btn btn-default">Сохранить</button>
+    </form>
+{% endblock %}

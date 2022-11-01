@@ -1,0 +1,104 @@
+{% extends 'catalog/catalog.html' %}
+
+<head>
+    {% block title %}
+        <title>{{ prod.name }}</title>
+    {% endblock %}
+</head>
+
+<!--{% block header %}-->
+<!--    <div class="page_header text-white">-->
+<!--        <h1>{{ prod.name }}</h1>-->
+<!--    </div>-->
+<!--{% endblock %}-->
+{% block button %}
+{% endblock %}
+
+{% block product %}
+    <div class="1">
+        {% if user.is_authenticated %}
+            <a class="btn btn-default" href="{% url 'product_edit' prod.pk %}">edit</a>
+        {% endif %}
+    </div>
+    {% include 'main_page/includes/show_messages.html' %}
+    {{ message }}
+
+
+        <p class="price">${{ prod.price }}</p>
+    
+        <form action="{% url 'basket:basket_add' prod.pk %}" method="post">
+            {{ basket_product_form }}
+            {% csrf_token %}
+            
+            <input type="submit" value="Add to basket">
+        </form>
+
+
+    <div class="prod_card_block">
+        <div>
+            <h4>{{ prod.type }}</h4>
+            <p>Название: {{ prod.name }}</p>
+            <p>ID: {{ prod.pk }}</p>
+            <p>Цена: {{ prod.price }}</p>
+            <p>Количество: {{ prod.amount }}</p>
+            <p>Артикул: {{ prod.vendor_code }}</p>
+            <p>Характеристики:<br> {{ prod.characteristic|linebreaksbr }}</p>
+            <p>Описание: {{ prod.description|linebreaksbr }}</p>
+        </div>
+        <div>
+    <!--        {% if prod.picture %}-->
+            <p>Изображение товара: </p>
+            <p><img src="{{ prod.picture.url }}" alt="{{ prod.name }}"></p>
+    <!--        {% endif %}-->
+        </div>
+    </div>
+
+    <!-- счётчик комментов -->
+    <p>
+    {% with comments.count as total_comments %}
+        <b>Комментариев: {{ total_comments }}</b>
+    {% endwith %}
+    </p>
+
+    <!-- инфо комментов -->
+    {% for comment in comments %}
+    <div class="comment">
+        <p class="info">
+            {% if user.profile.avatar.url %}
+                <img src= "{{ comment.name.avatar.url }}" style="width:80px"><br>
+            {% else %}
+                <img src= "/media/logo.png" style="width:80px"><br>
+            {% endif %}
+
+            <b>{{ comment.name }}</b><br>
+            {{ comment.created }}
+        </p>
+        <span>
+        {{ comment.body|linebreaks }}
+        </span>
+    </div>
+    {% empty %}
+        <p>Комментариев пока нет</p>
+    {% endfor %}
+
+    <!-- добавление комментов -->
+    {% if new_comment %}
+            <h3>Ваш комментарий добавлен</h3>
+        {% else %}
+
+            <h3>Добавить новый комментарий</h3>
+            <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+                {% if user.is_authenticated %}
+                    Имя: {{ user.username }}
+                    <br>
+                    Текст: {{ comment_form.body }}
+                {% else %}
+                    Имя: AnonymousUser
+                    <br>
+                    Текст: {{ comment_form.body }}
+                {% endif %}
+                <p><input type="submit" value="Добавить"></p>
+            </form>
+        {% endif %}
+
+{% endblock %}

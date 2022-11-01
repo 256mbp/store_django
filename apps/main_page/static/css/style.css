@@ -1,0 +1,286 @@
+body {
+
+    background-color: #e9ecef;
+    font-family: Roboto, sans-serif;
+}
+
+.navbar {
+    display:flex;
+    position:fixed;
+    justify-content:space-between;
+    align-items: center;
+    padding-left:50px;
+    padding-right: 50px;
+    top: 0;
+    background: #007765;
+    height: 80px;
+    width:100%;
+    color: white;
+}
+.navbar .logo{
+    margin:0px 10px;
+ 
+}
+.navbar .logo img{
+    width: 60px;
+    height: 60px;
+}
+.page_header {
+
+/*    margin-left: auto;
+    margin-right: auto;*/
+}
+
+.navbar_profile {
+    display:flex;
+    flex-direction: row; 
+    align-items: center; 
+}
+
+.navbar_profile .username{
+    padding-top: 10px;
+    margin:0px 10px;
+}
+
+.username a{
+    color: white;
+}
+
+.username a:hover {
+    color: #aef2d9;
+    font-size: 30px;
+
+}
+
+.container{
+    margin-top: 90px;
+    width: 100%;
+    height: 100%;
+
+/*    outline: 2px solid #999;*/
+}
+
+.content_list{
+    width: 100%;
+    display: flex;
+    flex-direction:column ;
+    list-style-type: none; 
+
+}
+.content_item{
+    height: 100%;
+    display: flex;
+    justify-content: center;  
+
+}
+.menu{
+    position:fixed;
+    height: 50%;
+/*    outline: 2px solid #999; */ 
+}
+.menu_category_list {
+
+    padding-top: 10px;
+    display: grid;
+    list-style-type: none;
+    row-gap: 8px;
+}
+.link {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 10px;
+    color: #007765;
+    transition: font-size 0.7s;
+}
+.link:hover {
+    color: #47b9a7;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+footer {
+    background: #007765;
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:30px;
+    width:100%;
+
+}
+.footer {
+
+    text-align: center;
+    font-size: 24px;
+    color: white;
+}
+.btn-default:hover{
+    color: green;
+}
+/*Статьи----------------------------------------------------------*/
+
+.date {
+    color: #828282;
+}
+.save {
+    float: right;
+}
+
+.post-form textarea, .post-form input {
+    width: 100%;
+
+}
+.button_plus {
+    display: flex;
+    box-sizing: border-box;
+    align-self:flex-end;
+    margin-top: 10px;
+    height:30px;
+    width:30px;
+}
+.bi {
+    color: #007765;
+}
+.post { 
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 30px; 
+
+}
+
+.post_body {
+    width:100%;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.post a, .post h1{
+    color: #007765;
+    text-decoration: none;
+    font-size: 20px;
+}
+.post a:hover{
+    color: #47b9a7;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.post_text a{
+    font-size: 18px;
+}
+.post_text a:hover{
+    font-size: 18px;
+    color: #47b9a7;
+    text-decoration: none;
+}
+
+.post_detail a, .post_detail h1{
+    color: #007765;
+    text-decoration: none;
+    font-size: 18px;
+}
+.post_detail a:hover{
+    color: #47b9a7;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/*Продукты--------------------------------------------------------*/
+
+.prod p{
+    font-size: 20px;  
+}
+.prod a {
+    color: #007765;
+    text-decoration: none;
+    font-size: 30px;
+}
+.prod a:hover{
+    color: #47b9a7;
+    text-decoration: none;
+    font-size: 30px;
+}
+.product_card h4{
+    color: darkgreen;
+}
+
+img {
+    width: 300px;
+}
+
+
+.prod_block {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.prod_card_block{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;  
+}
+
+/*Пагинация------------------------------------------------------*/
+.list-pages {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.list-pages a:hover{
+    color: #47b9a7;
+}
+
+.page-num{
+    color: #007765;
+    font-size: 18px;
+}
+
+/*Комментарии-----------------------------------------------------*/
+.comment {
+    display: flex;
+}
+
+.comment span {
+    width: 100%;
+}
+/*Сообщения-------------------------------------------------------*/
+
+/*Корзина---------------------------------------------------------*/
+.total {
+    font-size: 18px;
+}
+/*
+.bi-x-circle-fill{
+    align-items: center;
+    align-content: center; 
+}*/
+
+.text-right {
+
+    margin-top: 20px;
+    margin-right: 10px; 
+    text-align:right;
+}
+
+.h2 {
+    color: #007765;
+}
+.login {
+    align-self: center; 
+}
+.login h2 {
+    color: #007765;
+    text-align: center; 
+}
+/*.login btn-default{
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    align-content: center;
+}*/

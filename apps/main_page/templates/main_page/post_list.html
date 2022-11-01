@@ -1,0 +1,41 @@
+{% extends 'main_page/main_page.html' %}
+
+
+
+{% block content %}
+
+    {% for post in page_obj %}
+        <div class="post">
+            <div class="post_author">
+<!--                {% if post.author %}-->
+<!--                    <p><img src="{{ post.author.url }}" width="100px"></p>-->
+<!--                {% endif %}-->
+                Автор:
+                <br>
+                {{ post.author }}
+                <br>
+                <img src= "{{ post.author.profile.avatar.url }}" style="width:100px" border="2px">
+
+            </div>
+            <div class="post_body" >
+                <h1><a href="{% url 'post_detail' pk=post.pk %}" >{{ post.title }}</a></h1>
+                <p class="post_text" >{{ post.text|linebreaksbr|urlize }} </p>
+                    <div class="date">
+                        <p>Опубликовано: {{ post.published_date }}</p>
+                    </div>
+            </div>
+            <div class="post_picture">
+                 {% if post.picture %}
+                    <p><img src="{{ post.picture.url }}" alt="{{ post.name }} "
+                            style="width:200px"></p>
+                {% endif %}
+            </div>
+
+        </div>
+    {% endfor %}
+
+
+
+
+
+{% endblock %}

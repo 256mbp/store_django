@@ -1,0 +1,33 @@
+{% extends 'main_page/main_page.html' %}
+
+<head>
+    {% block title %}
+        <title>Редактировать профиль</title>
+    {% endblock %}
+</head>
+
+<body>
+    {% block button %}
+    {% endblock %}
+    {% block content %}
+    <div><h2>Редактировать профиль</h2>
+
+        {% include 'main_page/includes/show_messages.html' %}
+        {{ message }}
+
+        <form method="post" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+          <p>О себе:</p>
+          <p>{{ profile_form.bio }}</p>
+          <p>Местоположение: {{ profile_form.location }}</p>
+          <p>День рождения: {{ profile_form.birth_date }}</p>
+          {% if user.profile.avatar %}
+            <p><img src= "{{ user.profile.avatar.url|default:'' }}" style="width:200px"></p>
+          {% endif %}
+          <p>{{ profile_form.avatar }}</p>
+
+          <p><button type="submit">Сохранить изменения</button></p>
+        </form>
+    </div>
+
+    {% endblock %}
+</body>

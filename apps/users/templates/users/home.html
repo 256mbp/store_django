@@ -1,0 +1,45 @@
+{% extends 'main_page/main_page.html' %}
+
+<head>
+    {% block title %}
+        <title>Вход в систему</title>
+    {% endblock %}
+</head>
+
+<body>
+<!--  {% block header %}-->
+<!--        <div class="page_header text-white">-->
+<!--            <h1>Вход в систему</h1>-->
+<!--        </div>-->
+<!--  {% endblock %}-->
+    {% block button %}
+    {% endblock %}
+    {% block content %}
+      <div class="registration">
+        <h1>Привет, {{ user.username|default:'Друг' }} !</h1>
+
+        {% include 'main_page/includes/show_messages.html' %}
+        {{ message }}
+
+        <p> Добро пожаловать в тестовый магазин</p>
+        <div>
+          {% if user.is_authenticated %}
+
+              <p>О себе: {{ user.profile.bio|default:'' }}</p>
+              <p>Местоположение: {{ user.profile.location|default:'' }}</p>
+              <p>День рождения: {{ user.profile.birth_date|default:'' }}</p>
+              {% if user.profile.avatar %}
+                <p><img src= "{{ user.profile.avatar.url }}" style="width:200px"></p>
+              {% endif %}
+            <a class="btn btn-default" href="{% url 'update_profile' %}">Редактировать профиль</a>
+            <br>
+            <a class="btn btn-default" href="{% url 'logout' %}">Выйти</a>
+
+          {% else %}
+            <a class="btn btn-default" href="{% url 'signup' %}">Регистрация</a>
+            <a class="btn btn-default" href="{% url 'login' %}">Войти</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endblock %}
+</body>

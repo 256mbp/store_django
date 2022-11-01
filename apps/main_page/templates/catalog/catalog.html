@@ -1,0 +1,28 @@
+{% extends 'main_page/main_page.html' %}
+<!--{% load static %}-->
+
+
+<head>
+    {% block title %}
+        <title>Каталог</title>
+    {% endblock %}
+</head>
+
+<body>
+
+<!--{% block header %}-->
+<!--        <div class="page_header text-white">-->
+<!--            <h1>Каталог</h1>-->
+<!--        </div>-->
+<!--{% endblock %}-->
+
+    <div class="prod_block">
+        {% block content %}
+
+            {% block product %}
+            {% endblock %}
+
+        {% endblock %}
+    </div>
+
+</body>

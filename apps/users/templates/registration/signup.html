@@ -1,0 +1,20 @@
+{% extends 'main_page/main_page.html' %}
+
+<head>
+    {% block title %}
+        <title>Вход в систему</title>
+    {% endblock %}
+</head>
+
+{% block content %}
+    <h2>Регистрация</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Регистрация">
+    </form>
+
+    <p><a class="btn btn-default" href="{% url 'login' %}">Войти</a></p>
+    <p><a class="btn btn-default" href="{% url 'home' %}">Вернуться</a></p>
+{% endblock %}

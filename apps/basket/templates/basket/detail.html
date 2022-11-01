@@ -1,0 +1,60 @@
+{% extends 'main_page/main_page.html' %}
+
+
+{% block title %}
+    Корзина
+{% endblock %}
+
+{% block button %}
+{% endblock %}
+
+{% block content %}
+    <table class="basket">
+    <h2>Ваша корзина</h2>
+    
+        <thead>
+        <tr>
+            <th>Изображение</th>
+            <th>Товар</th>
+            <th>Количество</th>
+            <th>Цена за единицу</th>
+            <th>Цена</th>
+            <!-- <th>Удалить товар</th> -->
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in basket %}
+            {% with product=item.product %}
+                <tr>
+                    <td>
+
+                        <a href="{% url 'product_detail' product.pk %}">
+                            {% if product.picture %}
+                           <img src="{{ product.picture.url }}" style="width:100px">
+                            {% else %}
+                            <img src="{{ noimg.picture.url }}" style="width:100px">
+                            {% endif %} 
+                        </a>
+                    </td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">${{ item.total_price }}</td>
+                     <td ><a href="{% url 'basket:basket_remove' product.id%}"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z">
+</svg></a></td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total" >
+            <td colspan="3"></td>
+            <td>Total</td>
+            <td class="num">${{ basket.get_total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a class="btn btn-default" href="/catalog/">Продолжить покупки</a>
+        <a class="btn btn-default" href="#">Оплата</a>
+    </p>
+{% endblock %}

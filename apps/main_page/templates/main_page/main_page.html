@@ -1,0 +1,113 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Блок оглавления и подключения стилей -->
+        {% block title %}<title>Main Page</title>{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+    {% include 'main_page/includes/show_messages.html' %}
+        <!-- Блок шапки -->
+        <header>
+
+            <div class="navbar">
+                <div class="logo">
+                    <a class="link" href="/"><img src ="/media/logo.png"></a>
+                </div>
+                <div class="page_header text-white">
+                    <h1>Это тестовый сайт</h1>
+                </div>
+                <div class="navbar_profile">
+                    <div class="userpic">
+                        <img src= "{{ user.profile.avatar.url|default:' ' }}" style="width:50px"
+                             border="1px">
+                    </div>
+                    <div class="username">
+                        <a class="link"
+                           href="/home/"><h3>{{ user.username|default:'Войти' }}</h3></a>
+                    </div>
+                </div>
+            </div>
+
+
+        </header>
+
+        <!-- Основной контейнер -->
+        <div class="container">
+            <div class="row">
+                <div class="col-10">
+                    <div class="content_list">
+
+                        <!-- Кнопка добавления статьи -->
+                        {% block button %}
+                            <div class="button_plus">
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'post_new' %}"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                    fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                    </svg></a>
+                                {% endif %}
+                            </div>
+                        {% endblock %}
+
+                    <!-- Блок статей -->
+                    {% block content %}
+                    {% endblock %}
+
+                    <!-- Пагинация -->
+                        {% if page_obj.has_other_pages %}
+                            <nav class="list-pages">
+                                <ul>
+                                    {% if page_obj.has_previous %}
+                                        <a class="page-num" href="?page={{ page_obj.previous_page_number }}">Предыдущая страница</a>
+                                    {% endif %}
+
+                                    <!-- Цикл на радиус страниц -->
+                                    {% for p in page_obj.paginator.page_range %}
+                                       {% if page_obj.number == p %}
+                                            <span class="page-num page-num-selected">{{ p }}</span>
+                                       {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+                                            <a class="page-num" href="?page={{ p }}">{{ p }}</a>
+                                       {% endif %}
+                                    {% endfor %}
+
+                                    {% if page_obj.has_next %}
+                                        <a class="page-num" href="?page={{ page_obj.next_page_number }}">Следующая страница</a>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <!-- Блок меню -->
+                <div class="col-2">
+                    <div class="menu">
+                        <ul class="menu_category_list ">
+                        <li><a class="link " href="/admin/">Admin</a></li>
+                        <li><a class="link" href="/basket/">Basket</a></li>
+                        <li><a class="link" href="/catalog/">Catalog</a></li>
+                        <li><a class="link" href="/delivery/">Delivery</a></li>
+<!--                        <li><a class="link" href="../../home/">Login</a></li>-->
+                        <br>
+<!--                        <li><a class="link" href="/">Main Page</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    <!-- Блок подвала -->
+    <footer>
+        <div class="footer text-center">Страница-заглушка</div>
+    </footer>
+    </body>
+</html>
